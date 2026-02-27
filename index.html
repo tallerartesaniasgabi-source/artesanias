@@ -191,7 +191,8 @@ function abrirDetalle(titulo, desc, precio, img, tel) {
     
     let mensaje = "Hola Artesanías Gabi, me interesa la pieza " + titulo + " (" + precio + "). ¿Está disponible?";
     // Se agregó la "/" después de wa.me para que el link funcione
-    document.getElementById('btn-whatsapp').href = "https://wa.me" + tel + "?text=" + encodeURIComponent(mensaje);
+    // La forma correcta lleva la "/" después de wa.me
+document.getElementById('btn-whatsapp').href = "https://wa.me" + tel + "?text=" + encodeURIComponent(mensaje);
     
     document.getElementById('miModal').style.display = "block";
 }
@@ -210,6 +211,7 @@ window.onclick = function(event) {
 
 </body>
 </html>
+
 
 
 
