@@ -152,7 +152,7 @@
         </div>
 
         <!-- Producto 3 -->
-        <div class="card" onclick="abrirDetalle('Miyuki - Modelo 3', 'Descripción breve de la pieza mitológica.', '$65.00', 'ARETES 3.jpeg', '3204316342')">
+        <div class="card" onclick="abrirDetalle('Miyuki - Modelo 3', 'Descripción breve de la pieza mitológica.', '$65.00', 'ARETES 3.jpeg', '573204316342')">
             <img src="ARETES 3.jpeg" alt="Madera tallada">
             <div class="card-info">
                 <h3>Miyuki - Modelo 3</h3>
@@ -192,7 +192,7 @@ function abrirDetalle(titulo, desc, precio, img, tel) {
     let mensaje = "Hola Artesanías Gabi, me interesa la pieza " + titulo + " (" + precio + "). ¿Está disponible?";
     // Se agregó la "/" después de wa.me para que el link funcione
     // La forma correcta lleva la "/" después de wa.me
-document.getElementById('btn-whatsapp').href = "https://wa.me" + tel + "?text=" + encodeURIComponent(mensaje);
+document.getElementById('btn-whatsapp').href = "https://wa.me/" + tel + "?text=" + encodeURIComponent(mensaje);
     
     document.getElementById('miModal').style.display = "block";
 }
@@ -211,6 +211,7 @@ window.onclick = function(event) {
 
 </body>
 </html>
+
 
 
 
