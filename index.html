@@ -123,12 +123,23 @@
     display: none; position: fixed; z-index: 1000; left: 0; top: 0;
     width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);
 }
-.modal-content {
-    background-color: var(--paper-bg); margin: 5% auto; padding: 30px;
-    border: 2px solid var(--vintage-gold); width: 80%; max-width: 600px;
-    text-align: center; position: relative;
+/* Ventana de Detalles de Lujo */
+.modal {
+    display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+    width: 100%; height: 100%; background-color: rgba(0,0,0,0.9);
 }
-.close { position: absolute; right: 20px; top: 10px; font-size: 30px; cursor: pointer; }
+.modal-content {
+    background-size: cover; background-position: center;
+    margin: 5% auto; padding: 50px 30px; border: 1px solid var(--vintage-gold);
+    width: 85%; max-width: 500px; text-align: center; position: relative;
+    color: white; box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    border-radius: 5px;
+}
+.modal-overlay { /* Capa oscura sobre la imagen de fondo */
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.7); z-index: -1;
+}
+.close { position: absolute; right: 20px; top: 10px; font-size: 35px; cursor: pointer; color: var(--vintage-gold); }
 #modal-img { width: 100%; max-height: 300px; object-fit: contain; margin-bottom: 20px; }
 
     </style>
@@ -145,12 +156,29 @@
     </div>
 </div>
 
+<!-- Ventana Flotante con Fondo de Imagen -->
+<div id="miModal" class="modal">
+    <div id="modal-bg" class="modal-content">
+        <div class="modal-overlay"></div>
+        <span class="close" onclick="cerrarDetalle()">&times;</span>
+        <h2 id="modal-titulo" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px;"></h2>
+        <p id="modal-desc" style="font-style: italic; line-height: 1.8; margin-bottom: 30px; font-size: 1.1rem;"></p>
+        <h3 id="modal-precio" style="color: var(--vintage-gold); font-size: 2rem; margin-bottom: 30px;"></h3>
+        <a id="btn-whatsapp" href="#" target="_blank" class="btn-buy" style="background: var(--vintage-gold); border: none; padding: 15px 40px;">Consultar por WhatsApp</a>
+    </div>
+</div>
+
 <script>
-function abrirDetalle(titulo, desc, precio, img) {
+function abrirDetalle(titulo, desc, precio, img, tel) {
     document.getElementById('modal-titulo').innerText = titulo;
     document.getElementById('modal-desc').innerText = desc;
     document.getElementById('modal-precio').innerText = precio;
-    document.getElementById('modal-img').src = img;
+    document.getElementById('modal-bg').style.backgroundImage = "url('" + img + "')";
+    
+    // Configura el mensaje de WhatsApp automático
+    let mensaje = "Hola Artesanías Gabi, me interesa la pieza " + titulo + " (" + precio + "). ¿Está disponible?";
+    document.getElementById('btn-whatsapp').href = "https://wa.me" + tel + "?text=" + encodeURIComponent(mensaje);
+    
     document.getElementById('miModal').style.display = "block";
 }
 function cerrarDetalle() {
@@ -168,16 +196,15 @@ function cerrarDetalle() {
 <div class="container">
     <div class="grid-artesanias">
         
-       <!-- Producto 1: Rayos de Ares -->
-<div class="card" onclick="abrirDetalle('Rayos de Ares', 'Forjado en el fuego de la pasión. Un amuleto de fuerza y determinación inspirado en el dios de la guerra. Cada trazo geométrico representa la dirección inquebrantable del guerrero antiguo.', '$35.00', 'anillo_ares.jpg')">
-    <img src="anillo ares.jpeg" alt="Anillo Rayos de Ares">
+     <!-- Producto 1: Rayos de Ares -->
+<div class="card" onclick="abrirDetalle('Rayos de Ares', 'Inspirado en la fuerza indomable de Ares. Este anillo simboliza la determinación del guerrero antiguo, forjado con patrones que guían el espíritu hacia la victoria.', '$35.00', 'anillo_ares.jpg', '3204316342')">
+    <img src="anillo_ares.jpg" alt="Anillo Rayos de Ares">
     <div class="card-info">
         <h3>Rayos de Ares</h3>
         <span class="price">$35.00</span>
-        <p style="font-size: 0.8rem; color: var(--vintage-gold);">Clic para ver historia</p>
+        <p style="font-size: 0.8rem; color: var(--vintage-gold); cursor: pointer;">[ Ver detalles del mito ]</p>
     </div>
 </div>
-
 
         <!-- Producto 2 -->
         <div class="card">
@@ -209,6 +236,7 @@ function cerrarDetalle() {
 </body>
 
 </html>
+
 
 
 
