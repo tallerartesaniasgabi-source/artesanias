@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artesanía Viva | Taller de Autor</title>
-    <!-- Tipografía Vintage Profesional -->
+    <title>Artesanías Gabi | Taller de Autor</title>
+    <!-- Tipografía Vintage -->
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <style>
         :root {
@@ -24,8 +24,7 @@
         header {
             padding: 80px 20px;
             text-align: center;
-            background-image: linear-gradient(rgba(249, 247, 242, 0.8), rgba(249, 247, 242, 0.8)), url('https://images.unsplash.com');
-            background-size: cover;
+            background-color: #eee;
             border-bottom: 3px double var(--vintage-gold);
         }
 
@@ -60,7 +59,7 @@
             padding: 15px;
             border: 1px solid #e0dcd0;
             transition: all 0.4s ease;
-            position: relative;
+            cursor: pointer;
         }
 
         .card:hover {
@@ -73,7 +72,6 @@
             width: 100%;
             height: 350px;
             object-fit: cover;
-            filter: sepia(20%);
         }
 
         .card-info {
@@ -84,7 +82,6 @@
         .card-info h3 {
             font-family: 'Playfair Display', serif;
             margin: 10px 0;
-            font-size: 1.5rem;
         }
 
         .price {
@@ -92,7 +89,6 @@
             font-weight: bold;
             font-size: 1.3rem;
             display: block;
-            margin-bottom: 15px;
         }
 
         .btn-buy {
@@ -101,71 +97,90 @@
             color: white;
             padding: 12px 25px;
             display: inline-block;
-            letter-spacing: 1px;
             text-transform: uppercase;
             font-size: 0.8rem;
-            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
-        .btn-buy:hover {
-            background: var(--vintage-gold);
+        /* Ventana Detalle Lujo */
+        .modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+            width: 100%; height: 100%; background-color: rgba(0,0,0,0.9);
         }
-
-        footer {
-            text-align: center;
-            padding: 50px;
-            font-size: 0.9rem;
-            border-top: 1px solid #e0dcd0;
-            margin-top: 100px;
+        .modal-content {
+            background-size: cover; background-position: center;
+            margin: 5% auto; padding: 60px 30px; border: 1px solid var(--vintage-gold);
+            width: 85%; max-width: 500px; text-align: center; position: relative;
+            color: white; border-radius: 5px; box-sizing: border-box;
         }
-        /* Ventana de Detalles (Modal) */
-.modal {
-    display: none; position: fixed; z-index: 1000; left: 0; top: 0;
-    width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);
-}
-/* Ventana de Detalles de Lujo */
-.modal {
-    display: none; position: fixed; z-index: 1000; left: 0; top: 0;
-    width: 100%; height: 100%; background-color: rgba(0,0,0,0.9);
-}
-.modal-content {
-    background-size: cover; background-position: center;
-    margin: 5% auto; padding: 50px 30px; border: 1px solid var(--vintage-gold);
-    width: 85%; max-width: 500px; text-align: center; position: relative;
-    color: white; box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    border-radius: 5px;
-}
-.modal-overlay { /* Capa oscura sobre la imagen de fondo */
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.7); z-index: -1;
-}
-.close { position: absolute; right: 20px; top: 10px; font-size: 35px; cursor: pointer; color: var(--vintage-gold); }
-
+        .modal-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75); z-index: 0;
+        }
+        .modal-body { position: relative; z-index: 1; }
+        .close { position: absolute; right: 20px; top: 10px; font-size: 35px; cursor: pointer; color: var(--vintage-gold); z-index: 2; }
     </style>
 </head>
-    <!-- Ventana Flotante -->
-<div id="miModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="cerrarDetalle()">&times;</span>
-        <img id="modal-img" src="">
-        <h2 id="modal-titulo" style="font-family: 'Playfair Display', serif;"></h2>
-        <p id="modal-desc" style="font-style: italic; line-height: 1.6;"></p>
-        <h3 id="modal-precio" style="color: var(--vintage-gold);"></h3>
-        <a href="TU_LINK_DE_WHATSAPP" class="btn-buy">Comprar por WhatsApp</a>
+<body>
+
+<header>
+    <h1>ARTESANÍAS GABI</h1>
+    <p class="subtitle">Legado en cada detalle, arte en cada pieza</p>
+</header>
+
+<div class="container">
+    <div class="grid-artesanias">
+        
+        <!-- Producto 1 -->
+        <div class="card" onclick="abrirDetalle('Rayos de Ares', 'Inspirado en la fuerza indomable de Ares. Este anillo simboliza la determinación de la guerrera antigua, forjado con patrones que guían el espíritu hacia la victoria.', '$35.00', 'anillo ares.jpeg', '573204316342')">
+            <img src="anillo ares.jpeg" alt="Anillo Rayos de Ares">
+            <div class="card-info">
+                <h3>Rayos de Ares</h3>
+                <span class="price">$35.00</span>
+                <p style="font-size: 0.8rem; color: var(--vintage-gold);">[ Ver historia del mito ]</p>
+            </div>
+        </div>
+
+        <!-- Producto 2 -->
+        <div class="card" onclick="abrirDetalle('Miyuki - Modelo 2', 'Descripción breve de la pieza mitológica.', '$120.00', 'ARETES 2.jpeg', '573204316342')">
+            <img src="ARETES 2.jpeg" alt="Tejido artesanal">
+            <div class="card-info">
+                <h3>Miyuki - Modelo 2</h3>
+                <span class="price">$120.00</span>
+            </div>
+        </div>
+
+        <!-- Producto 3 -->
+        <div class="card" onclick="abrirDetalle('Miyuki - Modelo 3', 'Descripción breve de la pieza mitológica.', '$65.00', 'ARETES 3.jpeg', '573204316342')">
+            <img src="ARETES 3.jpeg" alt="Madera tallada">
+            <div class="card-info">
+                <h3>Miyuki - Modelo 3</h3>
+                <span class="price">$65.00</span>
+            </div>
+        </div>
+
     </div>
 </div>
 
-<!-- Ventana Flotante con Fondo de Imagen -->
+<!-- Ventana Flotante Única -->
 <div id="miModal" class="modal">
     <div id="modal-bg" class="modal-content">
         <div class="modal-overlay"></div>
         <span class="close" onclick="cerrarDetalle()">&times;</span>
-        <h2 id="modal-titulo" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px;"></h2>
-        <p id="modal-desc" style="font-style: italic; line-height: 1.8; margin-bottom: 30px; font-size: 1.1rem;"></p>
-        <h3 id="modal-precio" style="color: var(--vintage-gold); font-size: 2rem; margin-bottom: 30px;"></h3>
-        <a id="btn-whatsapp" href="#" target="_blank" class="btn-buy" style="background: var(--vintage-gold); border: none; padding: 15px 40px;">Consultar por WhatsApp</a>
+        <div class="modal-body">
+            <h2 id="modal-titulo" style="font-family: 'Playfair Display', serif; font-size: 2rem;"></h2>
+            <p id="modal-desc" style="font-style: italic; margin: 20px 0;"></p>
+            <h3 id="modal-precio" style="color: var(--vintage-gold); font-size: 1.8rem;"></h3>
+            <br>
+            <a id="btn-whatsapp" href="#" target="_blank" class="btn-buy" style="background: var(--vintage-gold);">Consultar por WhatsApp</a>
+        </div>
     </div>
 </div>
+
+<footer>
+    <p>&copy; 2024 Artesanías Gabi. Todos los derechos reservados.</p>
+</footer>
 
 <script>
 function abrirDetalle(titulo, desc, precio, img, tel) {
@@ -174,67 +189,28 @@ function abrirDetalle(titulo, desc, precio, img, tel) {
     document.getElementById('modal-precio').innerText = precio;
     document.getElementById('modal-bg').style.backgroundImage = "url('" + img + "')";
     
-    // Configura el mensaje de WhatsApp automático
     let mensaje = "Hola Artesanías Gabi, me interesa la pieza " + titulo + " (" + precio + "). ¿Está disponible?";
+    // Se agregó la "/" después de wa.me para que el link funcione
     document.getElementById('btn-whatsapp').href = "https://wa.me" + tel + "?text=" + encodeURIComponent(mensaje);
     
     document.getElementById('miModal').style.display = "block";
 }
+
 function cerrarDetalle() {
     document.getElementById('miModal').style.display = "none";
 }
+
+// Cerrar si hacen clic fuera del cuadro
+window.onclick = function(event) {
+    if (event.target == document.getElementById('miModal')) {
+        cerrarDetalle();
+    }
+}
 </script>
 
-<body>
-
-<header>
-    <h1>ARTESANÍA GABI</h1>
-    <p class="subtitle">Hecho a mano, con alma y tiempo</p>
-</header>
-
-<div class="container">
-    <div class="grid-artesanias">
-        
-     <!-- Producto 1: Rayos de Ares -->
-<div class="card" onclick="abrirDetalle('Rayos de Ares', 'Inspirado en la fuerza indomable de Ares. Este anillo simboliza la determinación de la guerrera antigua, forjado con patrones que guían el espíritu hacia la victoria.', '$35.00', 'anillo ares.jpeg', '573204316342')">
-    <img src="anillo ares.jpeg" alt="Anillo Rayos de Ares">
-    <div class="card-info">
-        <h3>Rayos de Ares</h3>
-        <span class="price">$35.00</span>
-        <p style="font-size: 0.8rem; color: var(--vintage-gold); cursor: pointer;">[ Ver detalles del mito ]</p>
-    </div>
-</div>
-
-        <!-- Producto 2 -->
-        <div class="card">
-            <img src="ARETES 2.jpeg" alt="Tejido artesanal">
-            <div class="card-info">
-                <h3>Miyuki - Modelo 2</h3>
-                <span class="price">$120.00</span>
-                <a href="TU_LINK_DE_PAGO_AQUI" class="btn-buy">Adquirir Pieza</a>
-            </div>
-        </div>
-
-        <!-- Producto 3 -->
-        <div class="card">
-            <img src="ARETES 3.jpeg" alt="Madera tallada">
-            <div class="card-info">
-                <h3>Muyiki - Modelo 3</h3>
-                <span class="price">$65.00</span>
-                <a href="TU_LINK_DE_PAGO_AQUI" class="btn-buy">Adquirir Pieza</a>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<footer>
-    <p>&copy; 2024 Mi Taller Independiente. Todos los derechos reservados.</p>
-</footer>
-
 </body>
-
 </html>
+
 
 
 
