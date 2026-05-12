@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artesanías Gabi | Taller de Autor</title>
-    <!-- Tipografía Vintage -->
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    <title>Artesanías Gabi | Catálogo Completo</title>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root {
             --vintage-gold: #c5a059;
@@ -19,207 +18,188 @@
             font-family: 'Lato', sans-serif;
             background-color: var(--paper-bg);
             color: var(--text-color);
+            display: flex; flex-direction: column; min-height: 100vh;
         }
 
         header {
-            padding: 80px 20px;
+            padding: 60px 20px;
             text-align: center;
-            background-color: #eee;
+            background-color: #ffffff;
             border-bottom: 3px double var(--vintage-gold);
         }
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 8vw, 3.5rem);
             color: var(--dark-wood);
-            margin: 0;
-            letter-spacing: 2px;
+            margin: 0; letter-spacing: 2px; text-transform: uppercase;
         }
 
-        .subtitle {
-            font-style: italic;
-            color: var(--vintage-gold);
-            font-size: 1.2rem;
-        }
+        .subtitle { font-style: italic; color: var(--vintage-gold); font-size: 1.1rem; margin-top: 10px; }
 
-        .container {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
 
         .grid-artesanias {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .card {
-            background: white;
-            padding: 15px;
-            border: 1px solid #e0dcd0;
+            background: white; padding: 15px; border: 1px solid #e0dcd0;
             transition: all 0.4s ease;
-            cursor: pointer;
+            cursor: pointer; display: flex; flex-direction: column;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            border-color: var(--vintage-gold);
-        }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); border-color: var(--vintage-gold); }
 
-        .card img {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-        }
+        .card img { width: 100%; height: 320px; object-fit: cover; background-color: #f0f0f0; }
 
-        .card-info {
-            text-align: center;
-            padding: 20px 10px;
-        }
+        .card-info { text-align: center; padding: 15px 5px; }
 
-        .card-info h3 {
-            font-family: 'Playfair Display', serif;
-            margin: 10px 0;
-        }
+        .card-info h3 { font-family: 'Playfair Display', serif; margin: 10px 0; color: var(--dark-wood); font-size: 1rem; height: 3em; overflow: hidden; }
 
-        .price {
-            color: var(--vintage-gold);
-            font-weight: bold;
-            font-size: 1.3rem;
-            display: block;
-        }
+        .price { color: var(--vintage-gold); font-weight: bold; font-size: 1.2rem; display: block; }
 
-        .btn-buy {
-            text-decoration: none;
-            background: var(--dark-wood);
-            color: white;
-            padding: 12px 25px;
-            display: inline-block;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            border: none;
-            cursor: pointer;
-        }
-
-        /* Ventana Detalle Lujo */
+        /* Modal */
         .modal {
             display: none; position: fixed; z-index: 1000; left: 0; top: 0;
             width: 100%; height: 100%; background-color: rgba(0,0,0,0.9);
+            backdrop-filter: blur(5px);
         }
         .modal-content {
             background-size: cover; background-position: center;
-            margin: 5% auto; padding: 60px 30px; border: 1px solid var(--vintage-gold);
-            width: 85%; max-width: 500px; text-align: center; position: relative;
-            color: white; border-radius: 5px; box-sizing: border-box;
+            margin: 5vh auto; border: 1px solid var(--vintage-gold);
+            width: 90%; max-width: 450px; position: relative; border-radius: 4px;
         }
         .modal-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.75); z-index: 0;
+            padding: 60px 30px; background: rgba(0, 0, 0, 0.75);
+            min-height: 450px; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; color: white;
         }
-        .modal-body { position: relative; z-index: 1; }
-        .close { position: absolute; right: 20px; top: 10px; font-size: 35px; cursor: pointer; color: var(--vintage-gold); z-index: 2; }
+        .close { position: absolute; right: 15px; top: 5px; font-size: 40px; cursor: pointer; color: var(--vintage-gold); z-index: 10; border: none; background: none; }
+        .btn-buy {
+            text-decoration: none; background: var(--vintage-gold); color: white; padding: 15px 30px;
+            display: inline-block; text-transform: uppercase; font-weight: bold; transition: 0.3s;
+        }
+
+        footer { background: var(--dark-wood); color: #888; text-align: center; padding: 30px 20px; margin-top: 50px; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>ARTESANÍAS GABI</h1>
+    <h1>Artesanías Gabi</h1>
     <p class="subtitle">Legado en cada detalle, arte en cada pieza</p>
 </header>
 
-<div class="container">
-    <div class="grid-artesanias">
-        
-        <!-- Producto 1 -->
-        <div class="card" onclick="abrirDetalle('ANILLO MIYUKI SENCILLO.png', 'Como el arco de Artemisa: una pieza tejida para la mujer que sigue su propio camino. El amuleto de tu propia libertad y naturaleza indomable.', '$80.00', 'anillo ares.jpeg', '573204316342')">
-            <img src="anillo ares.jpeg" alt="Anillo Rayos de Ares">
-            <div class="card-info">
-                <h3>Rayos de Ares</h3>
-                <span class="price">$80.00</span>
-                <p style="font-size: 0.8rem; color: var(--vintage-gold);">[ Ver historia del mito ]</p>
-            </div>
-        </div>
+<main class="container">
+    <div id="galeria" class="grid-artesanias"></div>
+</main>
 
-        <!-- Producto 2 -->
-        <div class="card" onclick="abrirDetalle('ANILLO MURANO Y CUARZO 7 CHAKRAS.png', 'Como un fragmento de la Madre Tierra en tu mano. Siete cuarzos que alinean tu energía con el latido del universo. Equilibrio puro para tu alma.', '$60.00', 'ARETES 2.jpeg', '573204316342')">
-            <img src="ARETES 2.jpeg" alt="Tejido artesanal">
-            <div class="card-info">
-                <h3>Miyuki - Modelo 2</h3>
-                <span class="price">$60.00</span>
-            </div>
-        </div>
-
-        <!-- Producto 3 -->
-        <div class="card" onclick="abrirDetalle('ANILLOS MIYUKI.jpeg', 'Como un poema escrito en cuentas. Estos anillos son el amuleto de las Musas, diseñados para acompañar cada uno de tus gestos con elegancia y propósito', '$19.00', 'ARETES 3.jpeg', '573204316342')">
-            <img src="ARETES 3.jpeg" alt="Madera tallada">
-            <div class="card-info">
-                <h3>Miyuki - Modelo 3</h3>
-                <span class="price">$19.00</span>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!-- Ventana Flotante Única -->
 <div id="miModal" class="modal">
     <div id="modal-bg" class="modal-content">
-        <div class="modal-overlay"></div>
-        <span class="close" onclick="cerrarDetalle()">&times;</span>
-        <div class="modal-body">
+        <button class="close" onclick="cerrarDetalle()">&times;</button>
+        <div class="modal-overlay">
             <h2 id="modal-titulo" style="font-family: 'Playfair Display', serif; font-size: 2rem;"></h2>
-            <p id="modal-desc" style="font-style: italic; margin: 20px 0;"></p>
-            <h3 id="modal-precio" style="color: var(--vintage-gold); font-size: 1.8rem;"></h3>
-            <br>
-            <a id="btn-whatsapp" href="#" target="_blank" class="btn-buy" style="background: var(--vintage-gold);">Consultar por WhatsApp</a>
+            <p id="modal-desc" style="font-style: italic; margin: 20px 0; line-height: 1.5;"></p>
+            <h3 id="modal-precio" style="color: var(--vintage-gold); font-size: 1.8rem; margin-bottom: 30px;"></h3>
+            <a id="btn-whatsapp" href="#" target="_blank" class="btn-buy">Preguntar Disponibilidad</a>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2024 Artesanías Gabi. Todos los derechos reservados.</p>
+    <p>&copy; 2024 Artesanías Gabi - Taller de Autor. <br> Respetando la tradición, creando el futuro.</p>
 </footer>
 
 <script>
-function abrirDetalle(titulo, desc, precio, img, tel) {
-    document.getElementById('modal-titulo').innerText = titulo;
-    document.getElementById('modal-desc').innerText = desc;
-    document.getElementById('modal-precio').innerText = precio;
-    document.getElementById('modal-bg').style.backgroundImage = "url('" + img + "')";
+const whatsappTel = "573204316342";
+
+// BASE DE DATOS COMPLETA DESDE EL PDF
+const productos = [
+    { id: 101, titulo: "PENDULOS CUARZO", precio: "$8.000", img: "PENDULOS CUARZO.jpeg" },
+    { id: 102, titulo: "COLLAR FLOR 5 PUNTAS", precio: "$44.000", img: "COLLAR FLOR 5 PUNTAS.jpeg" },
+    { id: 103, titulo: "ARETE ESTRELLA OCHO PUNTAS VERDE MOSTACILLA", precio: "$28.000", img: "ARETE ESTRELLA OCHO PUNTAS VERDE MOSTACILLA.jpeg" },
+    { id: 104, titulo: "ARETE FLOR DOS COLORES SEIS PUNTAS MOSTACILLA", precio: "$23.000", img: "ARETE FLOR DOS COLORES SEIS PUNTAS MOSTACILLA.jpeg" },
+    { id: 105, titulo: "ANILLOS MOSTACILLA", precio: "$13.000", img: "ANILLOS MOSTACILLA.jpeg" },
+    { id: 106, titulo: "ANILLOS MIYUKI", precio: "$19.000", img: "ANILLOS MIYUKI.jpeg" },
+    { id: 107, titulo: "ARETE PERRO MALTÉS MIYUKI", precio: "$30.000", img: "ARETE PERRO MALTÉS MIYUKI.jpeg" },
+    { id: 108, titulo: "ARETE SOMBRERO FLORES MIYUKI", precio: "$56.000", img: "ARETE SOMBRERO FLORES MIYUKI.jpeg" },
+    { id: 109, titulo: "ARETE HELADO MIYUKI", precio: "$28.000", img: "ARETE HELADO MIYUKI.jpeg" },
+    { id: 110, titulo: "ARETES SALLY MIYUKI", precio: "$41.000", img: "ARETES SALLY MIYUKI.jpeg" },
+    { id: 111, titulo: "FRIDA REALIDAD MIYUKI", precio: "$112.000", img: "FRIDA REALIDAD MIYUKI.jpeg" },
+    { id: 112, titulo: "ARETE MANDALA ESTRELLA PASTEL MOSTACILLA", precio: "$31.000", img: "ARETE MANDALA ESTRELLA PASTEL MOSTACILLA.jpeg" },
+    { id: 113, titulo: "MAXI ARETE ROSA FLOR MOSTACILLA", precio: "$47.000", img: "MAXI ARETE ROSA FLOR MOSTACILLA.jpeg" },
+    { id: 114, titulo: "ARETE DOS COLORES GRIS DORADO MOSTACILLA", precio: "$25.000", img: "ARETE DOS COLORES GRIS DORADO MOSTACILLA.jpeg" },
+    { id: 115, titulo: "MANILLA FLORES MOSTACILLA", precio: "$23.000", img: "MANILLA FLORES MOSTACILLA.jpeg" },
+    { id: 116, titulo: "MANILLA MULTICOLOR MOSTACILLA", precio: "$47.000", img: "MANILLA MULTICOLOR MOSTACILLA.jpeg" },
+    { id: 117, titulo: "COLLAR MANDALA ESTRELLA ROSA MOST", precio: "$19.000", img: "COLLAR MANDALA ESTRELLA ROSA MOST.jpeg" },
+    { id: 118, titulo: "ARETE ALAMBRISMO SENCILLO", precio: "$10.000", img: "ARETE ALAMBRISMO SENCILLO.jpeg" },
+    { id: 119, titulo: "ANILLO MIYUKI SENCILLO", precio: "$8.000", img: "ANILLO MIYUKI SENCILLO.jpeg" },
+    { id: 120, titulo: "CANDONGAS 15MM EN MOSTACILLA", precio: "$14.000", img: "CANDONGAS 15MM EN MOSTACILLA.jpeg" },
+    { id: 121, titulo: "TOPOS FLORES PEQUEÑAS MOSTACILLA", precio: "$10.000", img: "TOPOS FLORES PEQUEÑAS MOSTACILLA.jpeg" },
+    { id: 122, titulo: "ARETE MOSTACILLA TOPO VERDE", precio: "$30.000", img: "ARETE MOSTACILLA TOPO VERDE.jpeg" },
+    { id: 123, titulo: "ARETE ALAMBRISMO ESPIGA MURANO", precio: "$17.000", img: "ARETE ALAMBRISMO ESPIGA MURANO.jpeg" },
+    { id: 124, titulo: "MANILLAS ENCAUCHETADAS", precio: "$5.000", img: "MANILLAS ENCAUCHETADAS.jpeg" },
+    { id: 125, titulo: "MANILLAS HILO COREANO", precio: "$7.000", img: "MANILLAS HILO COREANO.jpeg" },
+    { id: 126, titulo: "MANILLAS CUARZO ENCAUCHETADAS", precio: "$10.000", img: "MANILLAS CUARZO ENCAUCHETADAS.jpeg" },
+    { id: 127, titulo: "ANILLO MURANO Y CUARZO 7 CHAKRAS", precio: "$6.000", img: "ANILLO MURANO Y CUARZO 7 CHAKRAS.jpeg" },
+    { id: 128, titulo: "EARCUFF TEJIDO", precio: "$8.000", img: "EARCUFF TEJIDO.jpeg" },
+    { id: 129, titulo: "ARETE ARO TEJIDO MOSTACILLA Y MURANO MEDIANO", precio: "$26.000", img: "ARETE ARO TEJIDO MOSTACILLA Y MURANO MEDIANO.jpeg" },
+    { id: 130, titulo: "COLLARES CADENAS MAS DIJES PEQUEÑOS", precio: "$10.000", img: "COLLARES CADENAS MAS DIJES PEQUEÑOS.jpeg" },
+    { id: 131, titulo: "ARETE ARO TEJIDO FLECOS", precio: "$31.000", img: "ARETE ARO TEJIDO FLECOS.jpeg" },
+    { id: 132, titulo: "BOLSO PERLA MORA Y DE VIDRIO CADENA MEDIANA", precio: "$120.000", img: "BOLSO PERLA MORA Y DE VIDRIO CADENA MEDIANA.jpeg" },
+    { id: 133, titulo: "BOLSO PEQUEÑO PERLA MORA MORADA", precio: "$47.000", img: "BOLSO PEQUEÑO PERLA MORA MORADA.jpeg" },
+    { id: 134, titulo: "COLLAR OKAMA GRANDE", precio: "$129.000", img: "COLLAR OKAMA GRANDE.jpeg" },
+    { id: 135, titulo: "MONEDERO EN MOSTACILLA", precio: "$55.000", img: "MONEDERO EN MOSTACILLA.jpeg" },
+    { id: 136, titulo: "COLLAR MEDIANO OKAMA", precio: "$55.000", img: "COLLAR MEDIANO OKAMA.jpeg" },
+    { id: 137, titulo: "OJOS TURCOS MIYUKI", precio: "$48.000", img: "OJOS TURCOS MIYUKI.jpeg" },
+    { id: 138, titulo: "ARETES CALAVERA PAR", precio: "$45.000", img: "ARETES CALAVERA PAR.jpeg" },
+    { id: 139, titulo: "PERRO BULLDOG", precio: "$22.000", img: "PERRO BULLDOG.jpeg" },
+    { id: 140, titulo: "ARETE FLOR AMARILLA", precio: "$20.000", img: "ARETE FLOR AMARILLA.jpeg" },
+    { id: 141, titulo: "COMBO KUMI", precio: "$23.000", img: "COMBO KUMI.jpeg" },
+    { id: 145, titulo: "ARETE TIPO ESFERA", precio: "$13.000", img: "ARETE TIPO ESFERA.jpeg" },
+    { id: 146, titulo: "PULSERA SMART WATCH", precio: "$95.000", img: "PULSERA SMART WATCH.jpeg" }
+];
+
+function cargarGaleria() {
+    const contenedor = document.getElementById('galeria');
+    productos.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.onclick = () => abrirDetalle(p);
+        card.innerHTML = `
+            <img src="${p.img}" alt="${p.titulo}" loading="lazy" onerror="this.src='https://placeholder.com...'">
+            <div class="card-info">
+                <span style="font-size:0.7rem; color:#aaa">REF: ${p.id}</span>
+                <h3>${p.titulo}</h3>
+                <span class="price">${p.precio}</span>
+            </div>
+        `;
+        contenedor.appendChild(card);
+    });
+}
+
+function abrirDetalle(p) {
+    document.getElementById('modal-titulo').innerText = p.titulo;
+    document.getElementById('modal-desc').innerText = "Pieza artesanal única, tejida con pasión y detalle. Una expresión de arte lista para acompañarte.";
+    document.getElementById('modal-precio').innerText = p.precio;
+    document.getElementById('modal-bg').style.backgroundImage = `url('${p.img}')`;
     
-    let mensaje = "Hola Artesanías Gabi, me interesa la pieza " + titulo + " (" + precio + "). ¿Está disponible?";
-    // Se agregó la "/" después de wa.me para que el link funcione
-    // La forma correcta lleva la "/" después de wa.me
-document.getElementById('btn-whatsapp').href = "https://wa.me/" + tel + "?text=" + encodeURIComponent(mensaje);
+    let mensaje = encodeURIComponent(`Hola Artesanías Gabi, me interesa la pieza "${p.titulo}" (Ref: ${p.id}). ¿Sigue disponible?`);
+    document.getElementById('btn-whatsapp').href = `https://wa.me{whatsappTel}?text=${mensaje}`;
     
     document.getElementById('miModal').style.display = "block";
 }
 
-function cerrarDetalle() {
-    document.getElementById('miModal').style.display = "none";
-}
+function cerrarDetalle() { document.getElementById('miModal').style.display = "none"; }
+window.onclick = (e) => { if (e.target.id === 'miModal') cerrarDetalle(); }
 
-// Cerrar si hacen clic fuera del cuadro
-window.onclick = function(event) {
-    if (event.target == document.getElementById('miModal')) {
-        cerrarDetalle();
-    }
-}
+cargarGaleria();
 </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
 
 
 
