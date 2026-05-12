@@ -171,7 +171,7 @@ function abrirDetalle(p) {
     document.getElementById('modal-bg-img').style.backgroundImage = "url('" + p.img + "')";
     
     let mensaje = encodeURIComponent("Hola Gabi, siento una conexión con " + p.titulo + " (Ref: " + p.id + "). ¿Está disponible para mí?");
-document.getElementById('btn-whatsapp').href = "https:/wa.me" + whatsappTel + "?text=" + mensaje;
+document.getElementById('btn-whatsapp').href = "https://whatsapp.com" + whatsappTel + "&text=" + mensaje;
 
     document.getElementById('miModal').style.display = "block";
 }
