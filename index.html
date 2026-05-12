@@ -3,86 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artesanías Gabi | Catálogo Completo</title>
+    <title>Artesanías Gabi | Taller de Autor</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        :root {
-            --vintage-gold: #c5a059;
-            --dark-wood: #2c241e;
-            --paper-bg: #f9f7f2;
-            --text-color: #4a4a4a;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Lato', sans-serif;
-            background-color: var(--paper-bg);
-            color: var(--text-color);
-            display: flex; flex-direction: column; min-height: 100vh;
-        }
-
-        header {
-            padding: 60px 20px;
-            text-align: center;
-            background-color: #ffffff;
-            border-bottom: 3px double var(--vintage-gold);
-        }
-
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 8vw, 3.5rem);
-            color: var(--dark-wood);
-            margin: 0; letter-spacing: 2px; text-transform: uppercase;
-        }
-
+        :root { --vintage-gold: #c5a059; --dark-wood: #2c241e; --paper-bg: #f9f7f2; --text-color: #4a4a4a; }
+        body { margin: 0; font-family: 'Lato', sans-serif; background-color: var(--paper-bg); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
+        header { padding: 60px 20px; text-align: center; background-color: #ffffff; border-bottom: 3px double var(--vintage-gold); }
+        h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 8vw, 3.5rem); color: var(--dark-wood); margin: 0; letter-spacing: 2px; text-transform: uppercase; }
         .subtitle { font-style: italic; color: var(--vintage-gold); font-size: 1.1rem; margin-top: 10px; }
-
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-
-        .grid-artesanias {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: white; padding: 15px; border: 1px solid #e0dcd0;
-            transition: all 0.4s ease;
-            cursor: pointer; display: flex; flex-direction: column;
-        }
-
+        .grid-artesanias { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: white; padding: 15px; border: 1px solid #e0dcd0; transition: all 0.4s ease; cursor: pointer; display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); border-color: var(--vintage-gold); }
-
         .card img { width: 100%; height: 320px; object-fit: cover; background-color: #f0f0f0; }
-
         .card-info { text-align: center; padding: 15px 5px; }
-
-        .card-info h3 { font-family: 'Playfair Display', serif; margin: 10px 0; color: var(--dark-wood); font-size: 1rem; height: 3em; overflow: hidden; }
-
+        .card-info h3 { font-family: 'Playfair Display', serif; margin: 10px 0; color: var(--dark-wood); font-size: 1rem; }
         .price { color: var(--vintage-gold); font-weight: bold; font-size: 1.2rem; display: block; }
-
-        /* Modal */
-        .modal {
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
-            width: 100%; height: 100%; background-color: rgba(0,0,0,0.9);
-            backdrop-filter: blur(5px);
-        }
-        .modal-content {
-            background-size: cover; background-position: center;
-            margin: 5vh auto; border: 1px solid var(--vintage-gold);
-            width: 90%; max-width: 450px; position: relative; border-radius: 4px;
-        }
-        .modal-overlay {
-            padding: 60px 30px; background: rgba(0, 0, 0, 0.75);
-            min-height: 450px; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center; color: white;
-        }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px); }
+        .modal-content { background-size: cover; background-position: center; margin: 5vh auto; border: 1px solid var(--vintage-gold); width: 90%; max-width: 450px; position: relative; border-radius: 4px; }
+        .modal-overlay { padding: 60px 30px; background: rgba(0, 0, 0, 0.75); min-height: 450px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; }
         .close { position: absolute; right: 15px; top: 5px; font-size: 40px; cursor: pointer; color: var(--vintage-gold); z-index: 10; border: none; background: none; }
-        .btn-buy {
-            text-decoration: none; background: var(--vintage-gold); color: white; padding: 15px 30px;
-            display: inline-block; text-transform: uppercase; font-weight: bold; transition: 0.3s;
-        }
-
+        .btn-buy { text-decoration: none; background: var(--vintage-gold); color: white; padding: 15px 30px; display: inline-block; text-transform: uppercase; font-weight: bold; transition: 0.3s; }
         footer { background: var(--dark-wood); color: #888; text-align: center; padding: 30px 20px; margin-top: 50px; }
     </style>
 </head>
@@ -104,63 +45,62 @@
             <h2 id="modal-titulo" style="font-family: 'Playfair Display', serif; font-size: 2rem;"></h2>
             <p id="modal-desc" style="font-style: italic; margin: 20px 0; line-height: 1.5;"></p>
             <h3 id="modal-precio" style="color: var(--vintage-gold); font-size: 1.8rem; margin-bottom: 30px;"></h3>
-            <a id="btn-whatsapp" href="#" target="_blank" class="btn-buy">Preguntar Disponibilidad</a>
+            <a id="btn-whatsapp" href="#" target="_blank" class="btn-buy">Reclamar mi amuleto</a>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>&copy; 2024 Artesanías Gabi - Taller de Autor. <br> Respetando la tradición, creando el futuro.</p>
+    <p>&copy; 2024 Artesanías Gabi - Taller de Autor.</p>
 </footer>
 
 <script>
 const whatsappTel = "573204316342";
 
-// BASE DE DATOS COMPLETA DESDE EL PDF
 const productos = [
-    { id: 101, titulo: "PENDULOS CUARZO", precio: "$8.000", img: "PENDULOS CUARZO.jpeg" },
-    { id: 102, titulo: "COLLAR FLOR 5 PUNTAS", precio: "$44.000", img: "COLLAR FLOR 5 PUNTAS.jpeg" },
-    { id: 103, titulo: "ARETE ESTRELLA OCHO PUNTAS VERDE MOSTACILLA", precio: "$28.000", img: "ARETE ESTRELLA OCHO PUNTAS VERDE MOSTACILLA.jpeg" },
-    { id: 104, titulo: "ARETE FLOR DOS COLORES SEIS PUNTAS MOSTACILLA", precio: "$23.000", img: "ARETE FLOR DOS COLORES SEIS PUNTAS MOSTACILLA.jpeg" },
-    { id: 105, titulo: "ANILLOS MOSTACILLA", precio: "$13.000", img: "ANILLOS MOSTACILLA.jpeg" },
-    { id: 106, titulo: "ANILLOS MIYUKI", precio: "$19.000", img: "ANILLOS MIYUKI.jpeg" },
-    { id: 107, titulo: "ARETE PERRO MALTÉS MIYUKI", precio: "$30.000", img: "ARETE PERRO MALTÉS MIYUKI.jpeg" },
-    { id: 108, titulo: "ARETE SOMBRERO FLORES MIYUKI", precio: "$56.000", img: "ARETE SOMBRERO FLORES MIYUKI.jpeg" },
-    { id: 109, titulo: "ARETE HELADO MIYUKI", precio: "$28.000", img: "ARETE HELADO MIYUKI.jpeg" },
-    { id: 110, titulo: "ARETES SALLY MIYUKI", precio: "$41.000", img: "ARETES SALLY MIYUKI.jpeg" },
-    { id: 111, titulo: "FRIDA REALIDAD MIYUKI", precio: "$112.000", img: "FRIDA REALIDAD MIYUKI.jpeg" },
-    { id: 112, titulo: "ARETE MANDALA ESTRELLA PASTEL MOSTACILLA", precio: "$31.000", img: "ARETE MANDALA ESTRELLA PASTEL MOSTACILLA.jpeg" },
-    { id: 113, titulo: "MAXI ARETE ROSA FLOR MOSTACILLA", precio: "$47.000", img: "MAXI ARETE ROSA FLOR MOSTACILLA.jpeg" },
-    { id: 114, titulo: "ARETE DOS COLORES GRIS DORADO MOSTACILLA", precio: "$25.000", img: "ARETE DOS COLORES GRIS DORADO MOSTACILLA.jpeg" },
-    { id: 115, titulo: "MANILLA FLORES MOSTACILLA", precio: "$23.000", img: "MANILLA FLORES MOSTACILLA.jpeg" },
-    { id: 116, titulo: "MANILLA MULTICOLOR MOSTACILLA", precio: "$47.000", img: "MANILLA MULTICOLOR MOSTACILLA.jpeg" },
-    { id: 117, titulo: "COLLAR MANDALA ESTRELLA ROSA MOST", precio: "$19.000", img: "COLLAR MANDALA ESTRELLA ROSA MOST.jpeg" },
-    { id: 118, titulo: "ARETE ALAMBRISMO SENCILLO", precio: "$10.000", img: "ARETE ALAMBRISMO SENCILLO.jpeg" },
-    { id: 119, titulo: "ANILLO MIYUKI SENCILLO", precio: "$8.000", img: "ANILLO MIYUKI SENCILLO.jpeg" },
-    { id: 120, titulo: "CANDONGAS 15MM EN MOSTACILLA", precio: "$14.000", img: "CANDONGAS 15MM EN MOSTACILLA.jpeg" },
-    { id: 121, titulo: "TOPOS FLORES PEQUEÑAS MOSTACILLA", precio: "$10.000", img: "TOPOS FLORES PEQUEÑAS MOSTACILLA.jpeg" },
-    { id: 122, titulo: "ARETE MOSTACILLA TOPO VERDE", precio: "$30.000", img: "ARETE MOSTACILLA TOPO VERDE.jpeg" },
-    { id: 123, titulo: "ARETE ALAMBRISMO ESPIGA MURANO", precio: "$17.000", img: "ARETE ALAMBRISMO ESPIGA MURANO.jpeg" },
-    { id: 124, titulo: "MANILLAS ENCAUCHETADAS", precio: "$5.000", img: "MANILLAS ENCAUCHETADAS.jpeg" },
-    { id: 125, titulo: "MANILLAS HILO COREANO", precio: "$7.000", img: "MANILLAS HILO COREANO.jpeg" },
-    { id: 126, titulo: "MANILLAS CUARZO ENCAUCHETADAS", precio: "$10.000", img: "MANILLAS CUARZO ENCAUCHETADAS.jpeg" },
-    { id: 127, titulo: "ANILLO MURANO Y CUARZO 7 CHAKRAS", precio: "$6.000", img: "ANILLO MURANO Y CUARZO 7 CHAKRAS.jpeg" },
-    { id: 128, titulo: "EARCUFF TEJIDO", precio: "$8.000", img: "EARCUFF TEJIDO.jpeg" },
-    { id: 129, titulo: "ARETE ARO TEJIDO MOSTACILLA Y MURANO MEDIANO", precio: "$26.000", img: "ARETE ARO TEJIDO MOSTACILLA Y MURANO MEDIANO.jpeg" },
-    { id: 130, titulo: "COLLARES CADENAS MAS DIJES PEQUEÑOS", precio: "$10.000", img: "COLLARES CADENAS MAS DIJES PEQUEÑOS.jpeg" },
-    { id: 131, titulo: "ARETE ARO TEJIDO FLECOS", precio: "$31.000", img: "ARETE ARO TEJIDO FLECOS.jpeg" },
-    { id: 132, titulo: "BOLSO PERLA MORA Y DE VIDRIO CADENA MEDIANA", precio: "$120.000", img: "BOLSO PERLA MORA Y DE VIDRIO CADENA MEDIANA.jpeg" },
-    { id: 133, titulo: "BOLSO PEQUEÑO PERLA MORA MORADA", precio: "$47.000", img: "BOLSO PEQUEÑO PERLA MORA MORADA.jpeg" },
-    { id: 134, titulo: "COLLAR OKAMA GRANDE", precio: "$129.000", img: "COLLAR OKAMA GRANDE.jpeg" },
-    { id: 135, titulo: "MONEDERO EN MOSTACILLA", precio: "$55.000", img: "MONEDERO EN MOSTACILLA.jpeg" },
-    { id: 136, titulo: "COLLAR MEDIANO OKAMA", precio: "$55.000", img: "COLLAR MEDIANO OKAMA.jpeg" },
-    { id: 137, titulo: "OJOS TURCOS MIYUKI", precio: "$48.000", img: "OJOS TURCOS MIYUKI.jpeg" },
-    { id: 138, titulo: "ARETES CALAVERA PAR", precio: "$45.000", img: "ARETES CALAVERA PAR.jpeg" },
-    { id: 139, titulo: "PERRO BULLDOG", precio: "$22.000", img: "PERRO BULLDOG.jpeg" },
-    { id: 140, titulo: "ARETE FLOR AMARILLA", precio: "$20.000", img: "ARETE FLOR AMARILLA.jpeg" },
-    { id: 141, titulo: "COMBO KUMI", precio: "$23.000", img: "COMBO KUMI.jpeg" },
-    { id: 145, titulo: "ARETE TIPO ESFERA", precio: "$13.000", img: "ARETE TIPO ESFERA.jpeg" },
-    { id: 146, titulo: "PULSERA SMART WATCH", precio: "$95.000", img: "PULSERA SMART WATCH.jpeg" }
+    { id: 101, titulo: "PENDULOS CUARZO", precio: "$8.000", img: "PENDULOS CUARZO.jpeg", desc: "El susurro de la tierra en un cristal. Deja que su peso encuentre tu centro y alinee tus verdades." },
+    { id: 102, titulo: "COLLAR FLOR 5 PUNTAS", precio: "$44.000", img: "COLLAR FLOR 5 PUNTAS.jpeg", desc: "Cinco pétalos, cinco elementos. Un mapa de armonía para quien florece en medio de la tormenta." },
+    { id: 103, titulo: "ARETE ESTRELLA OCHO PUNTAS VERDE MOSTACILLA", precio: "$28.000", img: "ARETE ESTRELLA OCHO PUNTAS VERDE MOSTACILLA.jpeg", desc: "Inspirado en la brújula de las almas antiguas. La esperanza verde que guía tus pasos hacia lo sagrado." },
+    { id: 104, titulo: "ARETE FLOR DOS COLORES SEIS PUNTAS MOSTACILLA", precio: "$23.000", img: "ARETE FLOR DOS COLORES SEIS PUNTAS MOSTACILLA.jpeg", desc: "La dualidad de la vida tejida en simetría. Oscuridad y luz bailando en tu rostro." },
+    { id: 105, titulo: "ANILLOS MOSTACILLA", precio: "$13.000", img: "ANILLOS MOSTACILLA.jpeg", desc: "Un círculo de protección que abraza tu tacto. Recordatorios constantes de tu fuerza artesana." },
+    { id: 106, titulo: "ANILLOS MIYUKI", precio: "$19.000", img: "ANILLOS MIYUKI.jpeg", desc: "Precisión japonesa con alma latina. Elegancia que se siente como una segunda piel." },
+    { id: 107, titulo: "ARETE PERRO MALTÉS MIYUKI", precio: "$30.000", img: "ARETE PERRO MALTÉS MIYUKI.jpeg", desc: "Lealtad tejida hilo a hilo. Un homenaje al amor incondicional que nos acompaña." },
+    { id: 108, titulo: "ARETE SOMBRERO FLORES MIYUKI", precio: "$56.000", img: "ARETE SOMBRERO FLORES MIYUKI.jpeg", desc: "Como una tarde de sol en el jardín de las musas. Color que celebra tu alegría de vivir." },
+    { id: 109, titulo: "ARETE HELADO MIYUKI", precio: "$28.000", img: "ARETE HELADO MIYUKI.jpeg", desc: "Dulzura eterna que no se derrite. Para la niña interior que aún cree en la magia." },
+    { id: 110, titulo: "ARETES SALLY MIYUKI", precio: "$41.000", img: "ARETES SALLY MIYUKI.jpeg", desc: "Cada puntada es un remiendo de amor propio. Perfectamente imperfectos, como el corazón." },
+    { id: 111, titulo: "FRIDA REALIDAD MIYUKI", precio: "$112.000", img: "FRIDA REALIDAD MIYUKI.jpeg", desc: "Pies para qué los quiero, si tengo alas para volar. La fuerza de Frida en cada cuenta tejida." },
+    { id: 112, titulo: "ARETE MANDALA ESTRELLA PASTEL MOSTACILLA", precio: "$31.000", img: "ARETE MANDALA ESTRELLA PASTEL MOSTACILLA.jpeg", desc: "Un portal de serenidad en tonos suaves. Geometría sagrada para calmar el espíritu." },
+    { id: 113, titulo: "MAXI ARETE ROSA FLOR MOSTACILLA", precio: "$47.000", img: "MAXI ARETE ROSA FLOR MOSTACILLA.jpeg", desc: "Grande como tu presencia. Una flor que nunca se marchita, dedicada a tu coraje." },
+    { id: 114, titulo: "ARETE DOS COLORES GRIS DORADO MOSTACILLA", precio: "$25.000", img: "ARETE DOS COLORES GRIS DORADO MOSTACILLA.jpeg", desc: "Ceniza y oro. El renacimiento del fénix capturado en un diseño atemporal." },
+    { id: 115, titulo: "MANILLA FLORES MOSTACILLA", precio: "$23.000", img: "MANILLA FLORES MOSTACILLA.jpeg", desc: "Un jardín en tu muñeca. El recordatorio de que la belleza crece a tu ritmo." },
+    { id: 116, titulo: "MANILLA MULTICOLOR MOSTACILLA", precio: "$47.000", img: "MANILLA MULTICOLOR MOSTACILLA.jpeg", desc: "Todos los caminos de la vida unidos por un hilo. La diversidad es tu mayor tesoro." },
+    { id: 117, titulo: "COLLAR MANDALA ESTRELLA ROSA MOST", precio: "$19.000", img: "COLLAR MANDALA ESTRELLA ROSA MOST.jpeg", desc: "El latido del cosmos cerca de tu pecho. Una estrella que brilla solo para ti." },
+    { id: 118, titulo: "ARETE ALAMBRISMO SENCILLO", precio: "$10.000", img: "ARETE ALAMBRISMO SENCILLO.jpeg", desc: "Líneas puras, pensamientos claros. La belleza de lo simple es la forma más alta de sofisticación." },
+    { id: 119, titulo: "ANILLO MIYUKI SENCILLO", precio: "$8.000", img: "ANILLO MIYUKI SENCILLO.jpeg", desc: "Un detalle mínimo para una voluntad máxima. La elegancia no necesita gritar." },
+    { id: 120, titulo: "CANDONGAS 15MM EN MOSTACILLA", precio: "$14.000", img: "CANDONGAS 15MM EN MOSTACILLA.jpeg", desc: "Círculos infinitos de protección. Un clásico renovado por manos que sueñan." },
+    { id: 121, titulo: "TOPOS FLORES PEQUEÑAS MOSTACILLA", precio: "$10.000", img: "TOPOS FLORES PEQUEÑAS MOSTACILLA.jpeg", desc: "Semillas de arte en tus orejas. Pequeñas victorias diarias que florecen con orgullo." },
+    { id: 122, titulo: "ARETE MOSTACILLA TOPO VERDE", precio: "$30.000", img: "ARETE MOSTACILLA TOPO VERDE.jpeg", desc: "La esencia del bosque y la frescura de la mañana. Conexión directa con la naturaleza." },
+    { id: 123, titulo: "ARETE ALAMBRISMO ESPIGA MURANO", precio: "$17.000", img: "ARETE ALAMBRISMO ESPIGA MURANO.jpeg", desc: "Trigo de cristal para una cosecha de sueños. El brillo que resalta tu luz interior." },
+    { id: 124, titulo: "MANILLAS ENCAUCHETADAS", precio: "$5.000", img: "MANILLAS ENCAUCHETADAS.jpeg", desc: "Lazos de amistad que se adaptan a todo. La flexibilidad es la clave de la paz." },
+    { id: 125, titulo: "MANILLAS HILO COREANO", precio: "$7.000", img: "MANILLAS HILO COREANO.jpeg", desc: "Hilos que conectan destinos. La leyenda del hilo rojo, ahora en tu mano." },
+    { id: 126, titulo: "MANILLAS CUARZO ENCAUCHETADAS", precio: "$10.000", img: "MANILLAS CUARZO ENCAUCHETADAS.jpeg", desc: "Piedras que guardan la memoria del tiempo. Energía pura para tu día a día." },
+    { id: 127, titulo: "ANILLO MURANO Y CUARZO 7 CHAKRAS", precio: "$6.000", img: "ANILLO MURANO Y CUARZO 7 CHAKRAS.jpeg", desc: "Siete luces para siete centros. Equilibrio total en el dedo que señala tu destino." },
+    { id: 128, titulo: "EARCUFF TEJIDO", precio: "$8.000", img: "EARCUFF TEJIDO.jpeg", desc: "Un susurro al oído que te recuerda tu grandeza. Sin perforaciones, solo arte." },
+    { id: 129, titulo: "ARETE ARO TEJIDO MOSTACILLA Y MURANO MEDIANO", precio: "$26.000", img: "ARETE ARO TEJIDO MOSTACILLA Y MURANO MEDIANO.jpeg", desc: "El ciclo eterno del sol y la luna. Un resplandor que no conoce el tiempo." },
+    { id: 130, titulo: "COLLARES CADENAS MAS DIJES PEQUEÑOS", precio: "$10.000", img: "COLLARES CADENAS MAS DIJES PEQUEÑOS.jpeg", desc: "Fragmentos de historias personales. Lleva tus secretos con discreción y clase." },
+    { id: 131, titulo: "ARETE ARO TEJIDO FLECOS", precio: "$31.000", img: "ARETE ARO TEJIDO FLECOS.jpeg", desc: "Flecos que atrapan el viento y las malas vibras. Movimiento y libertad en cada paso." },
+    { id: 132, titulo: "BOLSO PERLA MORA Y DE VIDRIO CADENA MEDIANA", precio: "$120.000", img: "BOLSO PERLA MORA Y DE VIDRIO CADENA MEDIANA.jpeg", desc: "Un cofre de cristal para tus tesoros. Elegancia de autor que redefine el lujo." },
+    { id: 133, titulo: "BOLSO PEQUEÑO PERLA MORA MORADA", precio: "$47.000", img: "BOLSO PEQUEÑO PERLA MORA MORADA.jpeg", desc: "La amatista hecha accesorio. Espiritualidad y estilo en la palma de tu mano." },
+    { id: 134, titulo: "COLLAR OKAMA GRANDE", precio: "$129.000", img: "COLLAR OKAMA GRANDE.jpeg", desc: "El escudo de la mujer medicina. Una obra maestra que cuenta el origen del mundo." },
+    { id: 135, titulo: "MONEDERO EN MOSTACILLA", precio: "$55.000", img: "MONEDERO EN MOSTACILLA.jpeg", desc: "Donde guardas tu abundancia. Que cada moneda se multiplique por el arte de estas manos." },
+    { id: 136, titulo: "COLLAR MEDIANO OKAMA", precio: "$55.000", img: "COLLAR MEDIANO OKAMA.jpeg", desc: "La fuerza de los ancestros en una escala cotidiana. Protección y orgullo indígena." },
+    { id: 137, titulo: "OJOS TURCOS MIYUKI", precio: "$48.000", img: "OJOS TURCOS MIYUKI.jpeg", desc: "La mirada que todo lo ve y todo lo cuida. Disuelve la envidia con el brillo del cristal." },
+    { id: 138, titulo: "ARETES CALAVERA PAR", precio: "$45.000", img: "ARETES CALAVERA PAR.jpeg", desc: "Memento Mori: recuerda vivir. Una celebración de la vida después de la vida." },
+    { id: 139, titulo: "PERRO BULLDOG", precio: "$22.000", img: "PERRO BULLDOG.jpeg", desc: "Tenacidad y ternura en una sola pieza. El guardián fiel de tu estilo propio." },
+    { id: 140, titulo: "ARETE FLOR AMARILLA", precio: "$20.000", img: "ARETE FLOR AMARILLA.jpeg", desc: "Un rayo de sol capturado. Para atraer la prosperidad y la alegría eterna." },
+    { id: 141, titulo: "COMBO KUMI", precio: "$23.000", img: "COMBO KUMI.jpeg", desc: "Entrelazados como el destino. Un juego de hilos que simboliza la unión perfecta." },
+    { id: 145, titulo: "ARETE TIPO ESFERA", precio: "$13.000", img: "ARETE TIPO ESFERA.jpeg", desc: "El mundo es un pañuelo, y tu belleza es el centro. Perfección esférica en cada cuenta." },
+    { id: 146, titulo: "PULSERA SMART WATCH", precio: "$95.000", img: "PULSERA SMART WATCH.jpeg", desc: "Donde el futuro se encuentra con el pasado. Tu tiempo es sagrado, vístelo de arte." }
 ];
 
 function cargarGaleria() {
@@ -183,25 +123,17 @@ function cargarGaleria() {
 
 function abrirDetalle(p) {
     document.getElementById('modal-titulo').innerText = p.titulo;
-    document.getElementById('modal-desc').innerText = "Pieza artesanal única, tejida con pasión y detalle. Una expresión de arte lista para acompañarte.";
+    document.getElementById('modal-desc').innerText = p.desc;
     document.getElementById('modal-precio').innerText = p.precio;
     document.getElementById('modal-bg').style.backgroundImage = `url('${p.img}')`;
-    
-    let mensaje = encodeURIComponent(`Hola Artesanías Gabi, me interesa la pieza "${p.titulo}" (Ref: ${p.id}). ¿Sigue disponible?`);
+    let mensaje = encodeURIComponent(`Hola Gabi, siento una conexión con "${p.titulo}" (Ref: ${p.id}). ¿Está disponible para mí?`);
     document.getElementById('btn-whatsapp').href = `https://wa.me{whatsappTel}?text=${mensaje}`;
-    
     document.getElementById('miModal').style.display = "block";
 }
 
 function cerrarDetalle() { document.getElementById('miModal').style.display = "none"; }
 window.onclick = (e) => { if (e.target.id === 'miModal') cerrarDetalle(); }
-
 cargarGaleria();
 </script>
 </body>
 </html>
-
-
-
-
-
