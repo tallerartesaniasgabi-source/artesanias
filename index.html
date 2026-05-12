@@ -7,23 +7,63 @@
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         :root { --vintage-gold: #c5a059; --dark-wood: #2c241e; --paper-bg: #f9f7f2; --text-color: #4a4a4a; }
-        body { margin: 0; font-family: 'Lato', sans-serif; background-color: var(--paper-bg); color: var(--text-color); display: flex; flex-direction: column; min-height: 100vh; }
+        
+        /* Evita saltos visuales al cargar */
+        * { box-sizing: border-box; }
+        
+        body { margin: 0; font-family: 'Lato', sans-serif; background-color: var(--paper-bg); color: var(--text-color); overflow-x: hidden; }
+        
         header { padding: 60px 20px; text-align: center; background-color: #ffffff; border-bottom: 3px double var(--vintage-gold); }
         h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 8vw, 3.5rem); color: var(--dark-wood); margin: 0; letter-spacing: 2px; text-transform: uppercase; }
         .subtitle { font-style: italic; color: var(--vintage-gold); font-size: 1.1rem; margin-top: 10px; }
+        
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
         .grid-artesanias { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: white; padding: 15px; border: 1px solid #e0dcd0; transition: all 0.4s ease; cursor: pointer; display: flex; flex-direction: column; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.08); border-color: var(--vintage-gold); }
-        .card img { width: 100%; height: 320px; object-fit: cover; background-color: #f0f0f0; }
+        
+        .card { 
+            background: white; padding: 15px; border: 1px solid #e0dcd0; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            cursor: pointer; display: flex; flex-direction: column;
+            will-change: transform; /* Optimiza rendimiento */
+        }
+        
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-color: var(--vintage-gold); }
+        
+        .card img { width: 100%; height: 320px; object-fit: cover; background-color: #f0f0f0; display: block; }
+        
         .card-info { text-align: center; padding: 15px 5px; }
-        .card-info h3 { font-family: 'Playfair Display', serif; margin: 10px 0; color: var(--dark-wood); font-size: 0.95rem; height: 3em; overflow: hidden; }
+        .card-info h3 { font-family: 'Playfair Display', serif; margin: 10px 0; color: var(--dark-wood); font-size: 0.95rem; }
         .price { color: var(--vintage-gold); font-weight: bold; font-size: 1.2rem; display: block; }
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); backdrop-filter: blur(5px); }
-        .modal-content { background-size: cover; background-position: center; margin: 5vh auto; border: 1px solid var(--vintage-gold); width: 90%; max-width: 450px; position: relative; border-radius: 4px; }
-        .modal-overlay { padding: 60px 30px; background: rgba(0, 0, 0, 0.75); min-height: 450px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; }
+
+        /* Modal corregido para evitar parpadeo */
+        .modal { 
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; 
+            width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); 
+            backdrop-filter: blur(8px);
+        }
+        
+        .modal-content { 
+            margin: 5vh auto; border: 1px solid var(--vintage-gold); 
+            width: 90%; max-width: 450px; position: relative; 
+            border-radius: 4px; overflow: hidden; background-color: var(--dark-wood);
+        }
+
+        /* Contenedor de imagen en el modal para que no palpite */
+        #modal-bg-img {
+            width: 100%; height: 100%; position: absolute;
+            background-size: cover; background-position: center;
+            opacity: 0.4; z-index: 0;
+        }
+        
+        .modal-overlay { 
+            padding: 60px 30px; position: relative; z-index: 1;
+            min-height: 450px; display: flex; flex-direction: column; 
+            justify-content: center; align-items: center; text-align: center; color: white; 
+        }
+        
         .close { position: absolute; right: 15px; top: 5px; font-size: 40px; cursor: pointer; color: var(--vintage-gold); z-index: 10; border: none; background: none; }
-        .btn-buy { text-decoration: none; background: var(--vintage-gold); color: white; padding: 15px 30px; display: inline-block; text-transform: uppercase; font-weight: bold; transition: 0.3s; }
+        .btn-buy { text-decoration: none; background: var(--vintage-gold); color: white; padding: 15px 30px; display: inline-block; text-transform: uppercase; font-weight: bold; transition: 0.3s; border: none; cursor: pointer; }
+        
         footer { background: var(--dark-wood); color: #888; text-align: center; padding: 30px 20px; margin-top: 50px; }
     </style>
 </head>
@@ -39,10 +79,11 @@
 </main>
 
 <div id="miModal" class="modal">
-    <div id="modal-bg" class="modal-content">
+    <div class="modal-content">
+        <div id="modal-bg-img"></div> <!-- Imagen de fondo separada -->
         <button class="close" onclick="cerrarDetalle()">&times;</button>
         <div class="modal-overlay">
-            <h2 id="modal-titulo" style="font-family: 'Playfair Display', serif; font-size: 1.8rem;"></h2>
+            <h2 id="modal-titulo" style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin: 0;"></h2>
             <p id="modal-desc" style="font-style: italic; margin: 20px 0; line-height: 1.5;"></p>
             <h3 id="modal-precio" style="color: var(--vintage-gold); font-size: 1.8rem; margin-bottom: 30px;"></h3>
             <a id="btn-whatsapp" href="#" target="_blank" class="btn-buy">Reclamar mi amuleto</a>
@@ -125,14 +166,23 @@ function abrirDetalle(p) {
     document.getElementById('modal-titulo').innerText = p.titulo;
     document.getElementById('modal-desc').innerText = p.desc;
     document.getElementById('modal-precio').innerText = p.precio;
-    document.getElementById('modal-bg').style.backgroundImage = `url('${p.img}')`;
-    let mensaje = encodeURIComponent(`Hola Gabi, siento una conexión con "${p.titulo}" (Ref: ${p.id}). ¿Está disponible para mí?`);
-    document.getElementById('btn-whatsapp').href = `https://wa.me{whatsappTel}?text=${mensaje}`;
+    
+    // Cambiamos la imagen de fondo de forma más suave
+    document.getElementById('modal-bg-img').style.backgroundImage = "url('" + p.img + "')";
+    
+    let mensaje = encodeURIComponent("Hola Gabi, siento una conexión con " + p.titulo + " (Ref: " + p.id + "). ¿Está disponible para mí?");
+    document.getElementById('btn-whatsapp').href = "https://wa.me" + whatsappTel + "?text=" + mensaje;
+    
     document.getElementById('miModal').style.display = "block";
 }
 
-function cerrarDetalle() { document.getElementById('miModal').style.display = "none"; }
-window.onclick = (e) => { if (e.target.id === 'miModal') cerrarDetalle(); }
+function cerrarDetalle() { 
+    document.getElementById('miModal').style.display = "none"; 
+    document.getElementById('modal-bg-img').style.backgroundImage = "none"; // Limpia al cerrar
+}
+
+window.onclick = function(e) { if (e.target.className === 'modal') cerrarDetalle(); }
+
 cargarGaleria();
 </script>
 </body>
