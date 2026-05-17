@@ -170,8 +170,8 @@ function abrirDetalle(p) {
     // Cambiamos la imagen de fondo de forma más suave
     document.getElementById('modal-bg-img').style.backgroundImage = "url('" + p.img + "')";
     
-    let mensaje = encodeURIComponent("Hola Gabi, siento una conexión con " + p.titulo + " (Ref: " + p.id + "). ¿Está disponible para mí?");
-document.getElementById('btn-whatsapp').href = `https://whatsapp.com{whatsappTel}&text=${mensaje}`;
+       const mensajeWha = encodeURIComponent(`Hola Gabi, estoy interesado en el producto: ${prod.titulo} (REF: ${prod.id}) con valor de ${prod.precio}`);
+    document.getElementById('btn-whatsapp').href = `https://whatsapp.com{whatsappTel}&text=${mensajeWha}`;
 
     document.getElementById('miModal').style.display = "block";
 }
