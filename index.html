@@ -122,8 +122,12 @@ function abrirDetalle(prod) {
 
 function enviarAWhatsApp() {
     if (!productoActual) return;
-    const mensajeWha = encodeURIComponent(`Hola Gabi, estoy interesado en el producto: ${productoActual.titulo} (REF: ${productoActual.id}) con valor de ${productoActual.precio}`);
-    window.location.href = "https://wa.me" + mensajeWha;
+
+    const mensajeWha = encodeURIComponent(
+        `Hola Gabi, estoy interesado en el producto: ${productoActual.titulo} (REF: ${productoActual.id}) con valor de ${productoActual.precio}`
+    );
+
+    window.location.href = `https://wa.me/${whatsappTel}?text=${mensajeWha}`;
 }
 
 function cerrarDetalle() {
