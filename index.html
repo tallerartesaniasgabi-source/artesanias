@@ -48,7 +48,7 @@
             <h2 id="modal-titulo" style="font-family: 'Playfair Display', serif; font-size: 1.8rem; margin: 0;"></h2>
             <p id="modal-desc" style="font-style: italic; margin: 20px 0; line-height: 1.5;"></p>
             <h3 id="modal-precio" style="color: var(--vintage-gold); font-size: 1.8rem; margin-bottom: 30px;"></h3>
-            <a id="btn-whatsapp" href="#" target="_blank" class="btn-buy">Reclamar mi amuleto</a>
+            <a id="btn-whatsapp" href="javascript:void(0);" class="btn-buy">Reclamar mi amuleto</a>
         </div>
     </div>
 </div>
@@ -59,6 +59,7 @@
 
 <script>
 const whatsappTel = "573204316342";
+let productoActual = null;
 
 const productos = [
     { id: 101, titulo: "PENDULOS CUARZO", precio: "$8.000", img: "PENDULOS CUARZO.jpg", desc: "El susurro de la tierra en un cristal. Deja que su peso encuentre tu centro y alinee tus verdades." },
@@ -108,15 +109,13 @@ function cargarGaleria() {
     });
 }
 
-let productoActual = null;
-
 function abrirDetalle(prod) {
     productoActual = prod;
     document.getElementById('modal-titulo').innerText = prod.titulo;
     document.getElementById('modal-desc').innerText = prod.desc;
     document.getElementById('modal-precio').innerText = prod.precio;
     document.getElementById('modal-bg-img').style.backgroundImage = `url('${prod.img}')`;
-    document.getElementById('btn-whatsapp').href = "javascript:void(0);";
+    
     document.getElementById('btn-whatsapp').onclick = enviarAWhatsApp;
     document.getElementById('miModal').style.display = 'block';
 }
@@ -125,10 +124,6 @@ function enviarAWhatsApp() {
     if (!productoActual) return;
     const mensajeWha = encodeURIComponent(`Hola Gabi, estoy interesado en el producto: ${productoActual.titulo} (REF: ${productoActual.id}) con valor de ${productoActual.precio}`);
     window.location.href = `https://wa.me{mensajeWha}`;
-}
-
-    
-    document.getElementById('miModal').style.display = 'block';
 }
 
 function cerrarDetalle() {
