@@ -108,14 +108,25 @@ function cargarGaleria() {
     });
 }
 
+let productoActual = null;
+
 function abrirDetalle(prod) {
+    productoActual = prod;
     document.getElementById('modal-titulo').innerText = prod.titulo;
     document.getElementById('modal-desc').innerText = prod.desc;
     document.getElementById('modal-precio').innerText = prod.precio;
     document.getElementById('modal-bg-img').style.backgroundImage = `url('${prod.img}')`;
-    
-    const mensajeWha = encodeURIComponent(`Hola Gabi, estoy interesado en el producto: ${prod.titulo} (REF: ${prod.id}) con valor de ${prod.precio}`);
-    document.getElementById('btn-whatsapp').href = `https://whatsapp.com{whatsappTel}&text=${mensajeWha}`;
+    document.getElementById('btn-whatsapp').href = "javascript:void(0);";
+    document.getElementById('btn-whatsapp').onclick = enviarAWhatsApp;
+    document.getElementById('miModal').style.display = 'block';
+}
+
+function enviarAWhatsApp() {
+    if (!productoActual) return;
+    const mensajeWha = encodeURIComponent(`Hola Gabi, estoy interesado en el producto: ${productoActual.titulo} (REF: ${productoActual.id}) con valor de ${productoActual.precio}`);
+    window.location.href = `https://wa.me{mensajeWha}`;
+}
+
     
     document.getElementById('miModal').style.display = 'block';
 }
